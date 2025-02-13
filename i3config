@@ -28,6 +28,7 @@ bindsym $mod+7    workspace  $ws7
 bindsym $mod+8    workspace  $ws8
 bindsym $mod+9    workspace  $ws9
 bindsym $mod+0    workspace  $ws10  
+bindsym $mod+s workspace "Main";  
 
 # move focused container to workspace
 bindsym $mod+Shift+1    move container to workspace  $ws1
@@ -48,8 +49,11 @@ bindsym $modw+p  exec  pavucontrol;
 bindsym $modw+f  exec  firefox;
 bindsym $modw+t  exec  thunar;
 bindsym $modw+c  exec  code;
+bindsym $modw+w  exec  webstorm;
+bindsym $modw+d  exec  discord;
 bindsym $modw+Return exec --no-startup-id xfce4-terminal
-bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym $mod+Return exec --no-startup-id xfce4-terminal
+bindsym Print exec --no-startup-id flameshot
 bindsym $mod+k kill
 bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/scripts/blur-lock
 bindsym $mod+Shift+r restart
@@ -87,28 +91,26 @@ bindsym $mod+space focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "Main"
-set $ws2 "M2"
-set $ws3 "Secondary"
-set $ws4 "S2"
-set $ws5 "Vertical"
-set $ws6 "Vertical2"
-set $ws7 "TV"
-set $ws8 "TV2"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
 # you can get from xrandr command
-workspace $ws1 output HDMI-1-0
-workspace $ws2 output HDMI-1-0
-workspace $ws3 output DP-1-0
-workspace $ws4 output DP-1-0
-workspace $ws5 output HDMI-A-1
-workspace $ws6 output HDMI-A-1
-workspace $ws7 output DisplayPort-1
-workspace $ws8 output DisplayPort-1
+workspace $ws1 output HDMI-0
+workspace $ws2 output HDMI-0
+workspace $ws3 output DP-0
+workspace $ws4 output DP-0
+workspace $ws5 output HDMI-A-1-1
+workspace $ws6 output HDMI-A-1-1
 
 
 bindcode 133 bar mode hide
@@ -140,6 +142,33 @@ client.focused		    	$lightblue	$darkblue	$white		$urgentred	$urgentred
 client.unfocused	    	$darkblue	$darkblue	$grey		$darkgrey	$darkgrey
 client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindcode 44 resize shrink width 10 px or 10 ppt
+        bindcode 45 resize grow height 10 px or 10 ppt
+        bindcode 46 resize shrink height 10 px or 10 ppt
+        bindcode 47 resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindcode 113 resize shrink width 10 px or 10 ppt
+        bindcode 116 resize grow height 10 px or 10 ppt
+        bindcode 111 resize shrink height 10 px or 10 ppt
+        bindcode 114 resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindcode 36 mode "default"
+        bindcode 9 mode "default"
+        bindcode $mod+27 mode "default"
+}
+
+bindcode $mod+27 mode "resize"
 
 ############################################
 # bar settings (input comes from i3blocks) #
