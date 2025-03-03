@@ -7,6 +7,9 @@ exec --no-startup-id sleep 2 && nitrogen --restore
 set $mod Mod1
 set $modw Mod4
 
+bindsym XF86AudioPlay exec playerctl play-pause
+
+
 focus_follows_mouse no
 workspace_layout default
 
@@ -14,8 +17,8 @@ workspace_layout default
 new_window pixel 1
 
 # Set inner/outer gaps
-gaps inner 2
-gaps outer 2
+gaps inner 0
+gaps outer 0
 
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
@@ -28,7 +31,8 @@ bindsym $mod+7    workspace  $ws7
 bindsym $mod+8    workspace  $ws8
 bindsym $mod+9    workspace  $ws9
 bindsym $mod+0    workspace  $ws10  
-bindsym $mod+s workspace "Main";  
+bindsym $mod+m workspace "Main";  
+bindsym $mod+s workspace "Secondary";  
 
 # move focused container to workspace
 bindsym $mod+Shift+1    move container to workspace  $ws1
@@ -41,13 +45,15 @@ bindsym $mod+Shift+7    move container to workspace  $ws7
 bindsym $mod+Shift+8    move container to workspace  $ws8
 bindsym $mod+Shift+9    move container to workspace  $ws9
 bindsym $mod+Shift+0    move container to workspace  $ws10
-bindsym $mod+Shift+s move container to workspace Main
+bindsym $mod+Shift+m move container to workspace Main
+bindsym $mod+Shift+s move container to workspace Secondary
 
 #shortcuts
 
 bindsym $modw+p  exec  pavucontrol;
 bindsym $modw+f  exec  firefox;
 bindsym $modw+t  exec  thunar;
+bindsym $modw+n  exec  cherrytree;
 bindsym $modw+c  exec  code;
 bindsym $modw+w  exec  webstorm;
 bindsym $modw+d  exec  discord;
@@ -102,15 +108,22 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+
+
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
 # you can get from xrandr command
-workspace $ws1 output HDMI-0
-workspace $ws2 output HDMI-0
-workspace $ws3 output DP-0
-workspace $ws4 output DP-0
-workspace $ws5 output HDMI-A-1-1
-workspace $ws6 output HDMI-A-1-1
+#workspace $ws1 output HDMI-0
+#workspace $ws2 output HDMI-0
+#workspace $ws3 output DP-0
+#workspace $ws4 output DP-0
+#workspace $ws5 output HDMI-A-1-1
+#workspace $ws6 output HDMI-A-1-1
+#workspace $ws7 output HDMI-A-1-1
+#workspace $ws8 output HDMI-A-1-1
+#workspace $ws9 output HDMI-A-1-1
+workspace "Main" output HDMI-0
+workspace "Secondary" output HDMI-A-1-1
 
 
 bindcode 133 bar mode hide
